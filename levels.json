@@ -1,0 +1,16 @@
+{
+  "ach_01": {
+    "name": "Acheron",
+    "creator": "Riot",
+    "verifier": "Zylenox",
+    "ytId": "dQw4w9WgXcQ",
+    "records": [{"player": "Trick", "link": "url"}]
+  },
+  "sc_02": {
+    "name": "Silent Clubstep",
+    "creator": "Sailent",
+    "verifier": "Paqeo",
+    "ytId": "dQw4w9WgXcQ",
+    "records": []
+  }
+}
