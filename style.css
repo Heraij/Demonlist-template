@@ -1,4 +1,4 @@
-/* Base Styling & Reset */
+/* Base Reset */
 * {
     margin: 0;
     padding: 0;
@@ -33,7 +33,7 @@ body {
 }
 
 .description {
-    color: #333333; /* Grey text */
+    color: #333333; /* Grey text description */
     font-size: 1.1rem;
     margin-top: 5px;
 }
@@ -47,16 +47,16 @@ body {
     gap: 30px;
 }
 
-/* Panels (Used on both sides) */
+/* General Panels */
 .panel {
-    background-color: #1e1e1e; /* Slightly lighter than body for depth */
+    background-color: #1a1a1a; /* Subtle elevation from #121212 body */
     border: 1px solid #333333;
     border-radius: 8px;
     padding: 20px;
     margin-bottom: 20px;
 }
 
-/* Left Side: Level Row Panels */
+/* Left Side: Clickable Level Row Panels */
 .level-panel {
     display: flex;
     align-items: center;
@@ -129,7 +129,7 @@ body {
     background: linear-gradient(to right, #c41d0e, #eb871c);
 }
 
-/* Dedicated Page View styling */
+/* Dedicated Page View Configuration */
 .single-level-view {
     display: block;
 }
