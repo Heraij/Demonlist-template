@@ -1,0 +1,32 @@
+/* Dark, immersive background */
+body {
+    background-color: #0b0c10;
+    color: #c5a1ff; /* Pastel purple accent or neon green/cyan */
+    font-family: 'Outfit', 'Segoe UI', sans-serif;
+}
+
+/* The card housing each level */
+.level-card {
+    background: linear-gradient(145deg, #1f2833, #151a21);
+    border: 1px solid #45f3ff; /* Neon cyan border */
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 15px rgba(0, 243, 255, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Hover effect to make it feel alive */
+.level-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 243, 255, 0.25);
+}
+
+/* Styling the rank number */
+.rank {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #66fcf1;
+    margin-right: 15px;
+    text-shadow: 0 0 10px rgba(102, 252, 241, 0.5);
+}
