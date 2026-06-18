@@ -1,49 +1,3 @@
-async function loadDemonlist() {
-    try {
-        // 1. Fetch both JSON files simultaneously
-        const [rankingResponse, levelsResponse] = await Promise.all([
-            fetch('./ranking.json'),
-            fetch('./levels.json')
-        ]);
-
-        const ranking = await rankingResponse.json();
-        const levels = await levelsResponse.json();
-        
-        const listContainer = document.getElementById('list-container');
-
-        // 2. Loop through the ranking array (this preserves the correct order)
-        ranking.forEach((levelId, index) => {
-            const levelData = levels[levelId];
-            const rank = index + 1; // Array starts at 0, so Rank 1 is index + 1
-
-            if (!levelData) {
-                console.warn(`Warning: Level ID "${levelId}" found in ranking, but missing in levels.json`);
-                return; 
-            }
-
-            // 3. Create and inject the HTML card
-            const levelCard = document.createElement('div');
-            levelCard.className = 'level-card';
-            
-            levelCard.innerHTML = `
-                <div class="level-header">
-                    <span class="rank">#${rank}</span>
-                    <h2 class="level-name">${levelData.name}</h2>
-                </div>
-                <p class="creator">By ${levelData.creator} | Verified by ${levelData.verifier}</p>
-                <iframe src="https://www.youtube.com/embed/${levelData.ytId}" frameborder="0" allowfullscreen></iframe>
-            `;
-            
-            listContainer.appendChild(levelCard);
-        });
-
-    } catch (error) {
-        console.error("Error loading the demonlist data:", error);
-    }
-}
-
-window.onload = loadDemonlist;
-
 async function initDemonlist() {
     try {
         const [rankingResponse, levelsResponse] = await Promise.all([
@@ -54,7 +8,7 @@ async function initDemonlist() {
         const ranking = await rankingResponse.json();
         const levels = await levelsResponse.json();
 
-        // Check if user is looking at a dedicated level page
+        // Check if user is looking at a dedicated level page via URL parameter
         const urlParams = new URLSearchParams(window.location.search);
         const levelId = urlParams.get('level');
 
@@ -69,7 +23,7 @@ async function initDemonlist() {
     }
 }
 
-// RENDER FUNCTION: The Dashboard List
+// RENDER: Main List View
 function showMainList(ranking, levels) {
     document.getElementById('main-view').classList.remove('hidden');
     document.getElementById('level-view').classList.add('hidden');
@@ -82,12 +36,12 @@ function showMainList(ranking, levels) {
 
         const rank = index + 1;
         
-        // Generate automatic YouTube thumbnail URL from the video ID
+        // Automatic YouTube thumbnail rendering
         const thumbnail = `https://img.youtube.com/vi/${level.ytId}/mqdefault.jpg`;
 
         const panel = document.createElement('a');
         panel.className = 'panel level-panel';
-        panel.href = `?level=${id}`; // Sets the URL parameter upon clicking
+        panel.href = `?level=${id}`; // Appends ?level=id to URL on click
 
         panel.innerHTML = `
             <div class="level-info">
@@ -102,7 +56,7 @@ function showMainList(ranking, levels) {
     });
 }
 
-// RENDER FUNCTION: Dedicated Level Page
+// RENDER: Dedicated Level Page View
 function showDedicatedPage(id, level, ranking) {
     document.getElementById('main-view').classList.add('hidden');
     document.getElementById('level-view').classList.remove('hidden');
@@ -110,7 +64,6 @@ function showDedicatedPage(id, level, ranking) {
 
     const rank = ranking.indexOf(id) + 1;
 
-    // Build lists of records if they exist
     let recordsHTML = '<p style="color:#333333; margin-top:10px;">No records yet.</p>';
     if (level.records && level.records.length > 0) {
         recordsHTML = level.records.map(r => `
